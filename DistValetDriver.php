@@ -1,6 +1,6 @@
 <?php
 
-class VueValetDriver extends ValetDriver
+class DistValetDriver extends ValetDriver
 {
     /**
      * Determine if the driver serves the request.
@@ -25,7 +25,10 @@ class VueValetDriver extends ValetDriver
      */
     public function isStaticFile($sitePath, $siteName, $uri)
     {
-        return $sitePath . '/dist' . $uri;
+        if (file_exists($staticFilePath = $sitePath . '/dist' . $uri)) {
+            return $staticFilePath;
+        }
+        return false;
     }
 
     /**
@@ -38,8 +41,6 @@ class VueValetDriver extends ValetDriver
      */
     public function frontControllerPath($sitePath, $siteName, $uri)
     {
-        return (explode('/', $uri)[1] !== 'static')
-            ? $sitePath . '/dist/index.html'
-            : $sitePath . '/dist' . $uri;
+        return $sitePath . '/dist/index.html';
     }
 }
