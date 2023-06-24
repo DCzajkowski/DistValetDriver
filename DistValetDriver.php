@@ -43,9 +43,6 @@ class DistValetDriver extends BasicValetDriver
      * @param  string  $uri
      * @return string
      */
-    /**
-     * Get the fully resolved path to the application's front controller.
-     */
     public function frontControllerPath(string $sitePath, string $siteName, string $uri): ?string
     {
         return $sitePath . '/dist/index.html';
