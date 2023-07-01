@@ -1,6 +1,10 @@
 <?php
 
-class DistValetDriver extends ValetDriver
+namespace Valet\Drivers\Custom;
+
+use Valet\Drivers\BasicValetDriver;
+
+class DistValetDriver extends BasicValetDriver
 {
     /**
      * Determine if the driver serves the request.
@@ -10,7 +14,7 @@ class DistValetDriver extends ValetDriver
      * @param  string  $uri
      * @return bool
      */
-    public function serves($sitePath, $siteName, $uri)
+    public function serves(string $sitePath, string $siteName, string $uri): bool
     {
         return file_exists($sitePath . '/dist/index.html');
     }
@@ -23,7 +27,7 @@ class DistValetDriver extends ValetDriver
      * @param  string  $uri
      * @return string|false
      */
-    public function isStaticFile($sitePath, $siteName, $uri)
+    public function isStaticFile(string $sitePath, string $siteName, string $uri)/*: string|false */
     {
         if (file_exists($staticFilePath = $sitePath . '/dist' . $uri)) {
             return $staticFilePath;
@@ -39,7 +43,7 @@ class DistValetDriver extends ValetDriver
      * @param  string  $uri
      * @return string
      */
-    public function frontControllerPath($sitePath, $siteName, $uri)
+    public function frontControllerPath(string $sitePath, string $siteName, string $uri): ?string
     {
         return $sitePath . '/dist/index.html';
     }
